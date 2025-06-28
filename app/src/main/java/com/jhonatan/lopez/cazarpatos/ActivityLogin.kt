@@ -3,6 +3,7 @@ package com.jhonatan.lopez.cazarpatos
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -59,6 +60,27 @@ class ActivityLogin : AppCompatActivity() {
         mediaPlayer.start()
     }
     private fun GuardarDatosEnPreferencias(){
+        manejadorArchivo= SharedPreferencesManager(this)
+        manejadorArchivo.SaveInformation("epn.fis" to "123")
+        manejadorArchivo= EncriptedSharedPreferencesManager(this)
+        manejadorArchivo.SaveInformation("epn.fis" to "1234")
+        manejadorArchivo= FileInternalManager(this)
+        manejadorArchivo.SaveInformation("epn.fis" to "12345")
+    }
+    private fun LeerDatosDePreferencias(){
+        var datoLeido: Pair<String, String>
+        manejadorArchivo= SharedPreferencesManager(this)
+        datoLeido= manejadorArchivo.ReadInformation()
+        Log.d("TAG", "SharedPreferencesManager" + datoLeido.toList().toString())
+        manejadorArchivo= EncriptedSharedPreferencesManager(this)
+        datoLeido= manejadorArchivo.ReadInformation()
+        Log.d("TAG", "EncriptedSharedPreferencesManager" + datoLeido.toList().toString())
+        manejadorArchivo= FileInternalManager(this)
+        datoLeido= manejadorArchivo.ReadInformation()
+        Log.d("TAG", "FileInternalManager" + datoLeido.toList().toString())
+    }
+    /*
+    private fun GuardarDatosEnPreferencias(){
         val email = editTextEmail.text.toString()
         val clave = editTextPassword.text.toString()
         val listadoAGrabar:Pair<String,String>
@@ -70,7 +92,8 @@ class ActivityLogin : AppCompatActivity() {
         }
         manejadorArchivo.SaveInformation(listadoAGrabar)
     }
-
+*/
+/*
     private fun LeerDatosDePreferencias(){
         val listadoLeido = manejadorArchivo.ReadInformation()
         if(listadoLeido.first != null){
@@ -79,7 +102,7 @@ class ActivityLogin : AppCompatActivity() {
         editTextEmail.setText ( listadoLeido.first )
         editTextPassword.setText ( listadoLeido.second )
     }
-
+*/
     private fun validateRequiredData():Boolean{
         val email = editTextEmail.text.toString()
         val password = editTextPassword.text.toString()
