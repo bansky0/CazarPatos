@@ -13,10 +13,10 @@
         android:theme="@style/Theme.CazarPatos.Personalizado"
         tools:targetApi="31">
         <activity
-            android:name=".RankingActivity"
+            android:name=".ActivityLogin"
             android:exported="false" />
         <activity
-            android:name=".ActivityLogin"
+            android:name=".RankingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
